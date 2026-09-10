@@ -49,7 +49,8 @@ bot.command('баланс', async (ctx) => {
     .gte('created_at', start.toISOString());
 
   if (error) {
-    await ctx.reply('Не получилось получить данные, попробуй позже.');
+    console.error('Supabase select error:', error);
+    await ctx.reply('Не получилось получить данные: ' + error.message);
     return;
   }
 
@@ -89,7 +90,8 @@ bot.on('message:text', async (ctx) => {
   });
 
   if (error) {
-    await ctx.reply('Не получилось сохранить, попробуй ещё раз.');
+    console.error('Supabase insert error:', error);
+    await ctx.reply('Не получилось сохранить: ' + error.message);
     return;
   }
 
